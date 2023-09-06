@@ -6,6 +6,29 @@ import Util.ConnectionUtil;
 import java.sql.*;
 
 public class SocialMediaDAO {
+
+    public Account getAccountByUsername(String username){
+        Connection connection = ConnectionUtil.getConnection();
+        try {
+            
+            String sql = "SELECT * FROM account WHERE username = ?;";
+            
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, username);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            while(rs.next()){
+                Account acc = new Account(rs.getInt("account_id"), rs.getString("username"),
+                        rs.getString("password"));
+                return acc;
+            }
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
     public Account createAccount(Account account){
         Connection connection = ConnectionUtil.getConnection();
         
