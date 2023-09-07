@@ -60,6 +60,10 @@ public class SocialMediaService {
         return appDAO.getAllMessages();
     }
 
+    public List<Message> getAllMessagesByAccountId(int id) {
+        return appDAO.getAllMessagesByAccountId(id);
+    }
+
     public Message getMessageById(int id) {
         return appDAO.getMessageById(id);
     }

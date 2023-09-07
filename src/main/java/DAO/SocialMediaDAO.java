@@ -124,6 +124,30 @@ public class SocialMediaDAO {
         return messages;
     }
 
+    public List<Message> getAllMessagesByAccountId(int id){
+        Connection connection = ConnectionUtil.getConnection();
+        List<Message> messages = new ArrayList<>();
+
+        try {            
+            String sql = "SELECT * FROM message WHERE posted_by = ?;";
+            
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);        
+            ResultSet rs = preparedStatement.executeQuery();
+            
+            while(rs.next()){
+                Message message = new Message(rs.getInt("message_id"), rs.getInt("posted_by"),
+                        rs.getString("message_text"), rs.getInt("time_posted_epoch"));
+                messages.add(message);
+            }
+
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+        return messages;
+    }
+
     public Message getMessageById(int id){
         Connection connection = ConnectionUtil.getConnection();
         try {
