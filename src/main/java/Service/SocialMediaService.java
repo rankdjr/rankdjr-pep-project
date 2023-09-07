@@ -6,6 +6,8 @@ import DAO.SocialMediaDAO;
 import Model.Account;
 import Model.Message;
 
+import java.util.List;
+
 public class SocialMediaService {
     SocialMediaDAO appDAO;
 
@@ -52,6 +54,10 @@ public class SocialMediaService {
         }
         
         return appDAO.createMessage(message);
+    }
+
+    public List<Message> getAllMessages() {
+        return appDAO.getAllMessages();
     }
         
 } 
