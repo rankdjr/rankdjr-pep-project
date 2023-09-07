@@ -25,6 +25,15 @@ public class SocialMediaService {
         
         return appDAO.createAccount(account);
     }
+
+    public Account userLogin(Account account) {
+        Account acc = appDAO.getAccountByUsername(account.getUsername());
+
+        if (acc == null || account.getPassword().compareTo(acc.getPassword()) != 0) 
+            return null;
+    
+        return acc;
+    }
         
 } 
 

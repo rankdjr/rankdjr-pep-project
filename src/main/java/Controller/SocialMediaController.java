@@ -45,14 +45,14 @@ public class SocialMediaController {
     }
 
     private void postLoginHandler(Context ctx) throws JsonProcessingException {
-        // ObjectMapper mapper = new ObjectMapper();
-        // Account account = mapper.readValue(ctx.body(), Account.class);
-        // //Account userLogin = socialMediaService.userLogin(account);
-        // if(newAccount == null){
-        //     ctx.status(400);
-        // }else{
-        //     ctx.json(mapper.writeValueAsString(newAccount));
-        // }        
+        ObjectMapper mapper = new ObjectMapper();
+        Account account = mapper.readValue(ctx.body(), Account.class);
+        Account verifiedAccount = socialMediaService.userLogin(account);
+        if(verifiedAccount == null){
+            ctx.status(401);
+        }else{
+            ctx.json(mapper.writeValueAsString(verifiedAccount));
+        }        
     }
 
 }
