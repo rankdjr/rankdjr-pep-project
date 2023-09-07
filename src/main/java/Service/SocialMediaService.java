@@ -81,7 +81,7 @@ public class SocialMediaService {
             System.out.println("message cannot be blank");
             return null;
         }
-        if (message_text.length() > 255) {
+        if (message_text.length() >= 255) {
             System.out.println("character limit exceeded");
             return null;
         }
