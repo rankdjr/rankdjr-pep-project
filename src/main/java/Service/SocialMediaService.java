@@ -63,6 +63,13 @@ public class SocialMediaService {
     public Message getMessageById(int id) {
         return appDAO.getMessageById(id);
     }
-        
+    
+    public Message deleteMessageById(int id) {
+        Message message = appDAO.getMessageById(id);
+        if (appDAO.deleteMessageById(id) == 0)
+            return null;
+
+        return message;
+    }
 } 
 
