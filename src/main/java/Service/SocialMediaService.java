@@ -51,8 +51,6 @@ public class SocialMediaService {
             return null;
         }
         
-
-
         return appDAO.createMessage(message);
     }
         
