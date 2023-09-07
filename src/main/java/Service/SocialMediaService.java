@@ -71,5 +71,24 @@ public class SocialMediaService {
 
         return message;
     }
+
+    public Message updateMessageById(int id, String message_text) {
+        if (appDAO.getMessageById(id) == null) {
+            System.out.println("invalid message id");
+            return null;
+        }
+        if (message_text.isBlank()) {
+            System.out.println("message cannot be blank");
+            return null;
+        }
+        if (message_text.length() > 255) {
+            System.out.println("character limit exceeded");
+            return null;
+        }
+
+        appDAO.updateMessageById(id, message_text);
+
+        return appDAO.getMessageById(id);
+    }
 } 
 
