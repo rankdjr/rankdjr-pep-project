@@ -20,10 +20,18 @@ public class SocialMediaService {
     }
 
     public Account createAccount(Account account) {
-        if (appDAO.getAccountByUsername(account.getUsername()) != null ||
-            account.getUsername().isBlank() ||
-            account.getPassword().length() < 4)
+        if (appDAO.getAccountByUsername(account.getUsername()) != null) {
+            System.out.println("username not available");
             return null;
+        }
+        if (account.getUsername().isBlank()) {
+            System.out.println("username cannot be blank");
+            return null;
+        }
+        if (account.getPassword().length() < 4) {
+            System.out.println("password length must be greater than 4 characters");
+            return null;
+        }
         
         return appDAO.createAccount(account);
     }
@@ -69,11 +77,11 @@ public class SocialMediaService {
     }
     
     public Message deleteMessageById(int id) {
-        Message message = appDAO.getMessageById(id);
+        Message messageToDelete = appDAO.getMessageById(id);
         if (appDAO.deleteMessageById(id) == 0)
             return null;
 
-        return message;
+        return messageToDelete;
     }
 
     public Message updateMessageById(int id, String message_text) {
